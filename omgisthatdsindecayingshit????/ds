@@ -649,7 +649,6 @@ _G.connection[2] = UserInputService.InputEnded:Connect(function(input, _)
 end)
 
 
-coroutine.wrap(function()
         workspace.ServerStuff.playAudio:FireServer({"holdout"}, "holdout_incoming", workspace)
         wait(0.8)
         workspace.ServerStuff.playAudio:FireServer({"AGENT", "heavy"}, "heavy1", workspace)
