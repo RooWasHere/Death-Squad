@@ -780,7 +780,22 @@ namecall = hookfunction(getrawmetatable(game).__namecall, newcclosure(function(s
     local method = getnamecallmethod()
     local args = {...}
 
-    
+    if method == "FireServer" then
+        if self.Name == "dealDamage" then
+            if typeof(args[1]) == "table" then
+                if args[1][2] ~= nil and args[1][3] ~= "shove" then
+                    coroutine.wrap(damage)(args[1][2], args[1][3])
+                end
+            end
+        end
+
+        if self.Name == "dealDamage" then
+            if typeof(args[1]) == "table" then
+                if args[1][3] ~= "shove" then
+                    coroutine.wrap(damage)(args[1][2], 60)
+                end
+            end
+        end
 
         if self.Name == "playAudio" then
             if args[1][1] == "movement_sounds" then
