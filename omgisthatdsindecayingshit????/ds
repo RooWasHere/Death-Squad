@@ -656,7 +656,8 @@ end)
         
        
     workspace.ServerStuff.playAudio:FireServer({"songs", "holdout_bosses"}, "zealot", game.Players.LocalPlayer.Character.HumanoidRootPart)
-        workspace.ServerStuff.applyGore:FireServer(ohString1, ohInstance2, ohInstance3, ohTable4)
+       task.wait(1)
+       workspace.ServerStuff.applyGore:FireServer(ohString1, ohInstance2, ohInstance3, ohTable4)
         task.wait(1.2)
         workspace.ServerStuff.playAudio:FireServer({"holdout", "boss_sounds"}, "sledge", workspace)
 local ohString1 = "player_ping"
