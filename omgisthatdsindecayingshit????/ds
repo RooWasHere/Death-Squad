@@ -321,7 +321,7 @@ local function start()
     ammo.Shells = 200
     ammo.Long = 200
     ammo.Short = 200
-    ammo.Heavy = 200
+    ammo.Heavy = 500
     ammo.Medium = 200
     ammo.Light = 200
 
@@ -426,6 +426,40 @@ _G.connection[1] = UserInputService.InputBegan:Connect(function(input, gameProce
             end
         end
 
+        if input.KeyCode == Enum.KeyCode.N then
+            if cooldown.n == true or cooldown.keybindAction == true then
+            return
+            end
+
+            cooldown.keybindAction = true
+            cooldown.n = true
+
+            workspace.ServerStuff.handlePerkVisibility:FireServer("scanner")
+
+            local animation = localPlayer.Character.Humanoid.Animator:LoadAnimation(tpAnimSets.special.radio)
+            animation.Priority = Enum.AnimationPriority.Action
+            animation:Play()
+
+            local random = math.random(1, 2)
+            workspace.ServerStuff.playAudio:FireServer({ "ai" }, "radio_call" .. random, localPlayer.Character)
+            localPlayer.Character:WaitForChild("radio_call" .. random).Ended:Wait()
+
+            local perk = localPlayer.Character.current_perk.Value
+            workspace.ServerStuff.changeStats:InvokeServer("changeclass", "shadow")
+
+            workspace.ServerStuff.dealDamage:FireServer("shadowhunter", nil, _G.serverKey, _G.playerKey)
+            workspace.ServerStuff.dealDamage:FireServer("shadowhunter", nil, _G.serverKey, _G.playerKey)
+
+            workspace.ServerStuff.changeStats:InvokeServer("changeclass", perk)
+
+            workspace.ServerStuff.handlePerkVisibility:FireServer("hide_perk")
+            cooldown.keybindAction = false
+
+            task.delay(30, function()
+                cooldown.n = false
+            end)
+        end
+    
         if input.KeyCode == Enum.KeyCode.J then
             if toggle.healing[1] == true or toggle.using == true then
                 return
@@ -670,6 +704,17 @@ local ohTable4 = {
 }
         workspace.ServerStuff.applyGore:FireServer(ohString1, ohInstance2, ohInstance3, ohTable4)
             task.wait(1.2)
+            workspace.ServerStuff.playAudio:FireServer({"holdout", "boss_sounds"}, "sledge", workspace)
+local ohString1 = "player_ping"
+local ohInstance2 = game.Workspace.activePlayers --this doesn't do anything
+local ohInstance3 = nil -- same
+local ohTable4 = {
+    [1] = Vector3.new(325.6919250488281, 6.4533371925354, 7.524389743804932), -- you can put in some positions
+    [2] = "DO NOT HARM DEATH SQUAD AGENTS",
+    [3] = 6 -- this handles the icon of ping, if 6 or higher icon will be hidden
+}
+        workspace.ServerStuff.applyGore:FireServer(ohString1, ohInstance2, ohInstance3, ohTable4)
+        task.wait(1.2)
         workspace.ServerStuff.playAudio:FireServer({"holdout", "boss_sounds"}, "sledge", workspace)
 local ohString1 = "player_ping"
 local ohInstance2 = game.Workspace.activePlayers --this doesn't do anything
@@ -686,34 +731,23 @@ local ohString1 = "player_ping"
 local ohInstance2 = game.Workspace.activePlayers --this doesn't do anything
 local ohInstance3 = nil -- same
 local ohTable4 = {
-    [1] = Vector3.new(326.4552001953125, 10.511015892028809, -24.23578453063965), -- you can put in some positions
-    [2] = "LAW 3",
-    [3] = 2 -- this handles the icon of ping, if 6 or higher icon will be hidden
-}
-    workspace.ServerStuff.applyGore:FireServer(ohString1, ohInstance2, ohInstance3, ohTable4)
-            task.wait(1.2)
-            workspace.ServerStuff.playAudio:FireServer({"holdout", "boss_sounds"}, "sledge", workspace)
-local ohString1 = "player_ping"
-local ohInstance2 = game.Workspace.activePlayers --this doesn't do anything
-local ohInstance3 = nil -- same
-local ohTable4 = {
-    [1] = Vector3.new(325.6919250488281, 6.4533371925354, 7.524389743804932), -- you can put in some positions
-    [2] = "DO NOT HARM DEATH SQUAD AGENTS",
-    [3] = 2 -- this handles the icon of ping, if 6 or higher icon will be hidden
+    [1] = Vector3.new(325.5856628417969, 6.4533371925354, -9.786577224731445), -- you can put in some positions
+    [2] = "ELIMINATE ALL CONTESTANTS",
+    [3] = 6 -- this handles the icon of ping, if 6 or higher icon will be hidden
 }
         workspace.ServerStuff.applyGore:FireServer(ohString1, ohInstance2, ohInstance3, ohTable4)
-            task.wait(1.2)
+        task.wait(1.2)
         workspace.ServerStuff.playAudio:FireServer({"holdout", "boss_sounds"}, "sledge", workspace)
 local ohString1 = "player_ping"
 local ohInstance2 = game.Workspace.activePlayers --this doesn't do anything
 local ohInstance3 = nil -- same
 local ohTable4 = {
-    [1] = Vector3.new(325.5856628417969, 6.4533371925354, -9.786577224731445), -- you can put in some positions
-    [2] = "ELIMINATE ALL CONTESTANTS",
+    [1] = Vector3.new(326.4552001953125, 10.511015892028809, -24.23578453063965), -- you can put in some positions
+    [2] = "LAW 3",
     [3] = 2 -- this handles the icon of ping, if 6 or higher icon will be hidden
 }
-        workspace.ServerStuff.applyGore:FireServer(ohString1, ohInstance2, ohInstance3, ohTable4)
-            task.wait(1.2)
+    workspace.ServerStuff.applyGore:FireServer(ohString1, ohInstance2, ohInstance3, ohTable4)
+    task.wait(1.2)
         workspace.ServerStuff.playAudio:FireServer({"holdout", "boss_sounds"}, "sledge", workspace)
 local ohString1 = "player_ping"
 local ohInstance2 = game.Workspace.activePlayers --this doesn't do anything
@@ -721,11 +755,11 @@ local ohInstance3 = nil -- same
 local ohTable4 = {
     [1] = Vector3.new(326.4552001953125, 6.4533371925354, -24.23578453063965), -- you can put in some positions
     [2] = "PROTECT YOUR OWN EXISTANCE",
-    [3] = 2 -- this handles the icon of ping, if 6 or higher icon will be hidden
+    [3] = 6 -- this handles the icon of ping, if 6 or higher icon will be hidden
 }
     workspace.ServerStuff.applyGore:FireServer(ohString1, ohInstance2, ohInstance3, ohTable4)
-            task.wait(1.2)
-       task.wait(35)
+            
+       task.wait(12)
        workspace.ServerStuff.playAudio:FireServer({"holdout", "boss_sounds"}, "rhyer", workspace)
 local ohString1 = "player_ping"
 local ohInstance2 = game.Workspace.activePlayers --this doesn't do anything
@@ -736,7 +770,7 @@ local ohTable4 = {
     [3] = 6 -- this handles the icon of ping, if 6 or higher icon will be hidden
 }
       workspace.ServerStuff.applyGore:FireServer(ohString1, ohInstance2, ohInstance3, ohTable4)
-            task.wait(1.2)
+       task.wait(1.2)
 
 _G.stats = {
     health    = 100,
