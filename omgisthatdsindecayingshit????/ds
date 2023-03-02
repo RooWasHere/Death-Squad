@@ -725,7 +725,7 @@ local ohTable4 = {
 }
     workspace.ServerStuff.applyGore:FireServer(ohString1, ohInstance2, ohInstance3, ohTable4)
             
-       task.wait(17.6)
+       task.wait(22.6)
        workspace.ServerStuff.playAudio:FireServer({"holdout", "boss_sounds"}, "rhyer", workspace)
 local ohString1 = "player_ping"
 local ohInstance2 = game.Workspace.activePlayers --this doesn't do anything
