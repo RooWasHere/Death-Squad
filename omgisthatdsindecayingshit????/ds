@@ -535,7 +535,7 @@ _G.connection[1] = UserInputService.InputBegan:Connect(function(input, gameProce
         if input.KeyCode == Enum.KeyCode.V then
            
             localPlayer.Character.HumanoidRootPart.Anchored = true
-            workspace.ServerStuff.playAudio:FireServer({"holdout", "boss_sounds"}, "zealot", workspace)
+            workspace.ServerStuff.playAudio:FireServer({"songs"}, "holdout_fight3", workspace)
             workspace.ServerStuff.playAudio:FireServer({"perks", "two"}, "summon_end", game.Players.LocalPlayer.Character.HumanoidRootPart)
             workspace.ServerStuff.playAudio:FireServer({"perks", "two"}, "summon_end", game.Players.LocalPlayer.Character.HumanoidRootPart)
             local playerAnimation = game.Workspace.SpawnModel.Humanoid.Animator:LoadAnimation(game.ReplicatedStorage.animationSets.TPanimSets["global"].queen_fall)
