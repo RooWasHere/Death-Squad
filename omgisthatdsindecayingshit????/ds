@@ -539,18 +539,18 @@ _G.connection[1] = UserInputService.InputBegan:Connect(function(input, gameProce
             playerAnimation.Priority = Enum.AnimationPriority.Action
             playerAnimation:Play()
             playerAnimation:AdjustSpeed(0.4)
-            task.wait(17)
+            task.wait(0.5)
             
             for i=1,30 do
             local playerAnimation = localPlayer.Character.Humanoid.Animator:LoadAnimation(game.ReplicatedStorage.animationSets.TPanimSets["global"].fallen)
             playerAnimation.Priority = Enum.AnimationPriority.Action
             playerAnimation:Play()
-            playerAnimation.TimePosition = 1.65
+            playerAnimation.TimePosition = 4.65
             playerAnimation:AdjustSpeed(0.45)
             task.wait(0.5)
             end
             
-            task.wait(17.5)
+            task.wait(14.5)
             local ohString1 = "player_ping"
             local ohInstance2 = game.Workspace.activePlayers --this doesn't do anything
             local ohInstance3 = nil -- same
