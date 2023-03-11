@@ -533,14 +533,14 @@ _G.connection[1] = UserInputService.InputBegan:Connect(function(input, gameProce
         end
         
         if input.KeyCode == Enum.KeyCode.V then
-           
+            workspace.ServerStuff.playAudio:FireServer({"holdout", "boss_sounds"}, "zealot", workspace)
             localPlayer.Character.HumanoidRootPart.Anchored = true
             local playerAnimation = localPlayer.Character.Humanoid.Animator:LoadAnimation(game.ReplicatedStorage.animationSets.TPanimSets["global"].fallen)
             playerAnimation.Priority = Enum.AnimationPriority.Action
             playerAnimation:Play()
-            playerAnimation:AdjustSpeed(0.65)
-            task.wait(1)
-            workspace.ServerStuff.playAudio:FireServer({"holdout", "boss_sounds"}, "zealot", workspace)
+            playerAnimation:AdjustSpeed(0.4)
+            task.wait(17)
+            
             for i=1,30 do
             local playerAnimation = localPlayer.Character.Humanoid.Animator:LoadAnimation(game.ReplicatedStorage.animationSets.TPanimSets["global"].fallen)
             playerAnimation.Priority = Enum.AnimationPriority.Action
@@ -550,7 +550,7 @@ _G.connection[1] = UserInputService.InputBegan:Connect(function(input, gameProce
             task.wait(0.5)
             end
             
-            task.wait(12)
+            task.wait(17.5)
             local ohString1 = "player_ping"
             local ohInstance2 = game.Workspace.activePlayers --this doesn't do anything
             local ohInstance3 = nil -- same
