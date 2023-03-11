@@ -535,22 +535,22 @@ _G.connection[1] = UserInputService.InputBegan:Connect(function(input, gameProce
         if input.KeyCode == Enum.KeyCode.V then
            
             localPlayer.Character.HumanoidRootPart.Anchored = true
-            workspace.ServerStuff.playAudio:FireServer({"songs"}, "holdout_fight3", workspace)
-            workspace.ServerStuff.playAudio:FireServer({"perks", "two"}, "summon_end", game.Players.LocalPlayer.Character.HumanoidRootPart)
-            workspace.ServerStuff.playAudio:FireServer({"perks", "two"}, "summon_end", game.Players.LocalPlayer.Character.HumanoidRootPart)
-            local playerAnimation = game.Workspace.SpawnModel.Humanoid.Animator:LoadAnimation(game.ReplicatedStorage.animationSets.TPanimSets["global"].queen_fall)
+            local playerAnimation = localPlayer.Character.Humanoid.Animator:LoadAnimation(game.ReplicatedStorage.animationSets.TPanimSets["global"].fallen)
             playerAnimation.Priority = Enum.AnimationPriority.Action
             playerAnimation:Play()
-            playerAnimation.TimePosition = 2
-            playerAnimation:AdjustSpeed(0.45)
-            for i=1,70 do
+            playerAnimation:AdjustSpeed(0.65)
+            task.wait(1)
+            workspace.ServerStuff.playAudio:FireServer({"holdout", "boss_sounds"}, "zealot", workspace)
+            for i=1,30 do
+            local playerAnimation = localPlayer.Character.Humanoid.Animator:LoadAnimation(game.ReplicatedStorage.animationSets.TPanimSets["global"].fallen)
             playerAnimation.Priority = Enum.AnimationPriority.Action
             playerAnimation:Play()
-            playerAnimation.TimePosition = 2
+            playerAnimation.TimePosition = 1.65
             playerAnimation:AdjustSpeed(0.45)
             task.wait(0.5)
             end
-            task.wait(2)
+            
+            task.wait(12)
             local ohString1 = "player_ping"
             local ohInstance2 = game.Workspace.activePlayers --this doesn't do anything
             local ohInstance3 = nil -- same
@@ -561,10 +561,12 @@ _G.connection[1] = UserInputService.InputBegan:Connect(function(input, gameProce
             }
 
             workspace.ServerStuff.applyGore:FireServer(ohString1, ohInstance2, ohInstance3, ohTable4)
+            workspace.ServerStuff.playAudio:FireServer({"holdout", "boss_sounds"}, "rhyer", workspace)
             task.wait(1)
-            workspace.ServerStuff.playAudio:FireServer({"songs", "holdout_bosses"}, "zealot", workspace)
-            task.wait(1)
-            local playerAnimation = game.Workspace.SpawnModel.Humanoid.Animator:LoadAnimation(game.ReplicatedStorage.animationSets.TPanimSets["special"].getup)
+            workspace.ServerStuff.playAudio:FireServer({"songs"}, "holdout_fight3", workspace)
+            task.wait(1.2)
+            localPlayer.Character.HumanoidRootPart.Anchored = false
+            local playerAnimation = localPlayer.Character.Humanoid.Animator:LoadAnimation(game.ReplicatedStorage.animationSets.TPanimSets["special"].getup)
             playerAnimation.Priority = Enum.AnimationPriority.Action
             playerAnimation:Play()
             game:GetService("StarterGui"):SetCore("SendNotification",{
@@ -572,8 +574,7 @@ _G.connection[1] = UserInputService.InputBegan:Connect(function(input, gameProce
             Text = "YOU ARE DEPLOYED FOR A REASON",
             })
             
-            task.wait(1.2)
-            localPlayer.Character.HumanoidRootPart.Anchored = false
+            
         end
 
         if input.KeyCode == Enum.KeyCode.B then
