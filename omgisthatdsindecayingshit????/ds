@@ -551,6 +551,15 @@ _G.connection[1] = UserInputService.InputBegan:Connect(function(input, gameProce
             end
             
             task.wait(1)
+            
+            local playerAnimation = localPlayer.Character.Humanoid.Animator:LoadAnimation(game.ReplicatedStorage.animationSets.TPanimSets["special"].getup)
+            playerAnimation.Priority = Enum.AnimationPriority.Action
+            playerAnimation:Play()
+            game:GetService("StarterGui"):SetCore("SendNotification",{
+            Title = "Ulaycon",
+            Text = "YOU ARE DEPLOYED FOR A REASON",
+            })
+            localPlayer.Character.HumanoidRootPart.Anchored = false
             local ohString1 = "player_ping"
             local ohInstance2 = game.Workspace.activePlayers --this doesn't do anything
             local ohInstance3 = nil -- same
@@ -565,14 +574,6 @@ _G.connection[1] = UserInputService.InputBegan:Connect(function(input, gameProce
             task.wait(1)
             workspace.ServerStuff.playAudio:FireServer({"songs"}, "holdout_fight3", workspace)
             task.wait(1.2)
-            localPlayer.Character.HumanoidRootPart.Anchored = false
-            local playerAnimation = localPlayer.Character.Humanoid.Animator:LoadAnimation(game.ReplicatedStorage.animationSets.TPanimSets["special"].getup)
-            playerAnimation.Priority = Enum.AnimationPriority.Action
-            playerAnimation:Play()
-            game:GetService("StarterGui"):SetCore("SendNotification",{
-            Title = "Ulaycon",
-            Text = "YOU ARE DEPLOYED FOR A REASON",
-            })
             
             
         end
