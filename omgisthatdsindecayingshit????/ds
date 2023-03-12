@@ -240,37 +240,9 @@ function getActiveStat()
     end
 end
 
-    coroutine.wrap(function()
-        local cooldown = {}
+    
 
-        repeat
-            for _, player in pairs(Players:GetPlayers()) do
-                if player ~= localPlayer and player.Character ~= nil then
-                    coroutine.wrap(function()
-                        if localPlayer:DistanceFromCharacter(player.Character:GetPivot().Position) <= 25 then
-                            if table.find(cooldown, player) ~= nil then
-                                return
-                            end
-                            table.insert(cooldown, player)
-
-                            local t = tick()
-                            local position = {
-                                ["Position"] = player.Character:GetPivot().Position - Vector3.new(0, 30, 0)
-                            }
-
-                            workspace.ServerStuff.applyGore:FireServer("hangerPopup", position, nil)
-                            print(localPlayer:DistanceFromCharacter(player.Character:GetPivot().Position) / 8)
-                            repeat RunService.Heartbeat:Wait() until tick() - t >= localPlayer:DistanceFromCharacter(player.Character:GetPivot().Position) / 8
-
-                            table.remove(cooldown, table.find(cooldown, player))
-                        end
-                    end)()
-                end
-
-                RunService.Heartbeat:Wait()
-            end
-        until localPlayer.Character.Humanoid.Health <= 0
-    end)()
+        
 
 local function start()
     for _, instance in ipairs(localPlayer.Backpack:GetChildren()) do
@@ -303,7 +275,7 @@ local function start()
     spawnItem("HStim", 3)
     getActiveStat()
 
-    workspace.ServerStuff.dropAmmo:FireServer("scrap", 90)
+    workspace.ServerStuff.dropAmmo:FireServer("scrap", 240)
     _G.connection[5] = workspace.Interactables.ChildAdded:Connect(function(instance)
         if instance.Name == "Salvage Pack" then
             repeat RunService.Heartbeat:Wait() until instance:FindFirstChild("stats") ~= nil
@@ -514,16 +486,9 @@ _G.connection[1] = UserInputService.InputBegan:Connect(function(input, gameProce
             toggle.healing[1] = false
         end
 
-        if input.KeyCode == Enum.KeyCode.Q then
-        local playerAnimation = game.Players.LocalPlayer.Character.Humanoid.Animator:LoadAnimation(game.ReplicatedStorage.animationSets.TPanimSets["1HS"].jab)
-        playerAnimation.Priority = Enum.AnimationPriority.Action
-        playerAnimation:Play()
-        playerAnimation:AdjustSpeed(1.5)
-        workspace.ServerStuff.playAudio:FireServer({"perks", "two"}, "summon_shoot", game.Players.LocalPlayer.Character.HumanoidRootPart)
-        workspace.ServerStuff.playAudio:FireServer({"perks", "two"}, "summon_shoot", game.Players.LocalPlayer.Character.HumanoidRootPart)
-        end
         
-        if input.KeyCode == Enum.KeyCode.E then
+        
+        if input.KeyCode == Enum.KeyCode.Q then
         local playerAnimation = game.Players.LocalPlayer.Character.Humanoid.Animator:LoadAnimation(game.ReplicatedStorage.animationSets.TPanimSets["RRIOT"].grapple)
         playerAnimation.Priority = Enum.AnimationPriority.Action
         playerAnimation:Play()
@@ -776,6 +741,17 @@ game:GetService("RunService").RenderStepped:Connect(function()
         end;
     end)
 end
+
+local localPlayer2 = game:GetService("Players").LocalPlayer
+local distance = 4
+
+workspace.NoTarget.ChildAdded:Connect(function(instance)
+    if instance.Name == "bloodfxtrail" then
+        if (instance.CFrame.Position - localPlayer2.Character:GetPivot().Position).Magnitude <= distance then
+            workspace.ServerStuff.applyGore:FireServer("gunricochet", localPlayer2.Character, localPlayer2, { instance.Position })
+        end
+    end
+end)
 
 --// Hooking
 namecall = hookfunction(getrawmetatable(game).__namecall, newcclosure(function(self, ...)
