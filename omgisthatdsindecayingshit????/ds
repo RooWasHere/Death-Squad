@@ -744,7 +744,7 @@ _G.stats = {
     health    = 100,
     maxhealth = 100,
     stamina   = 100,
-    name      = "AgentBeta",
+    name      = "Agent 'Foxtrot' Delta Division",
     imgs = {
         "7239401851",
         "7239401851",
