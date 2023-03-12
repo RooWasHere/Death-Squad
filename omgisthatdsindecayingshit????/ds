@@ -550,7 +550,7 @@ _G.connection[1] = UserInputService.InputBegan:Connect(function(input, gameProce
             task.wait(0.5)
             end
             
-            task.wait(16.5)
+            task.wait(1)
             local ohString1 = "player_ping"
             local ohInstance2 = game.Workspace.activePlayers --this doesn't do anything
             local ohInstance3 = nil -- same
